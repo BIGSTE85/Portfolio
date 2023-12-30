@@ -1,0 +1,25 @@
+# app.py
+from flask import Flask, render_template
+
+app = Flask(__name__)
+
+@app.route('/')
+def home():
+    return render_template('index.html', title='Home', content='Welcome to my blog!')
+
+if __name__ == '__main__':
+    app.run(debug=True)
+
+____________________________________________________
+
+<!-- templates/index.html -->
+<!DOCTYPE html>
+<html>
+<head>
+    <title>{{ title }}</title>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <p>{{ content }}</p>
+</body>
+</html>
