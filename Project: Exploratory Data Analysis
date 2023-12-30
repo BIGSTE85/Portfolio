@@ -1,0 +1,16 @@
+# EDA.ipynb
+import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load the dataset
+df = pd.read_csv('your_dataset.csv')
+
+# Display basic statistics
+print(df.describe())
+
+# Plot a histogram
+plt.hist(df['column_name'])
+plt.xlabel('X-axis label')
+plt.ylabel('Y-axis label')
+plt.title('Histogram of Column')
+plt.show()
