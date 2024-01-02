@@ -1,0 +1,45 @@
+// BlogApp.js
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const BlogApp = () => {
+  const [blogs, setBlogs] = useState([]);
+  const [newBlog, setNewBlog] = useState({ title: '', content: '' });
+
+  useEffect(() => {
+    axios.get('/api/blogs')
+      .then(response => setBlogs(response.data))
+      .catch(error => console.error(error));
+  }, []);
+
+  const addBlog = () => {
+    axios.post('/api/blogs', newBlog)
+      .then(response => setBlogs([...blogs, response.data]))
+      .catch(error => console.error(error));
+  };
+
+  return (
+    <div>
+      <h1>Blog App</h1>
+      <ul>
+        {blogs.map(blog => (
+          <li key={blog._id}>{blog.title}: {blog.content}</li>
+        ))}
+      </ul>
+      <input
+        type="text"
+        placeholder="Title"
+        value={newBlog.title}
+        onChange={(e) => setNewBlog({ ...newBlog, title: e.target.value })}
+      />
+      <textarea
+        placeholder="Content"
+        value={newBlog.content}
+        onChange={(e) => setNewBlog({ ...newBlog, content: e.target.value })}
+      />
+      <button onClick={addBlog}>Add Blog</button>
+    </div>
+  );
+};
+
+export default BlogApp;
