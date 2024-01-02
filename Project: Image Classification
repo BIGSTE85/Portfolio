@@ -1,0 +1,23 @@
+# image_classification.py
+from sklearn.model_selection import train_test_split
+from sklearn.ensemble import RandomForestClassifier
+from sklearn import metrics
+from sklearn.datasets import load_digits
+
+# Load the digits dataset
+digits = load_digits()
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(digits.data, digits.target, test_size=0.25, random_state=42)
+
+# Create a random forest classifier
+clf = RandomForestClassifier(n_estimators=100)
+
+# Train the classifier
+clf.fit(X_train, y_train)
+
+# Make predictions on the test set
+y_pred = clf.predict(X_test)
+
+# Evaluate the model
+print("Accuracy:", metrics.accuracy_score(y_test, y_pred))
